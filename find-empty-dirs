@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+find . -depth -type d -empty
+# -delete to delete

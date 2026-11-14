@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# srtu file_to_sort.txt # file is replaced
+[[ $# -eq 0 ]] && { echo "Usage: srtu <file>"; exit 1; }
+FILESIZE=$(stat -c%s "$1") || exit 1
+TH=$(( $(nproc --all) - 2 ))
+(( TH < 1 )) && TH=1
+F=$(df -h . | tail -1 | awk '{print $4}')
+echo "File size = $(numfmt --grouping "$FILESIZE") bytes ; Using $TH threads ; Free here: $F"
+printf '\n\n\n\n\n\033[5F'
+time pv -cN input -B 200M "$1" | dos2unix -f | TMPDIR="$(dirname "$1")" LC_ALL=C sort -S80% -u --parallel=$TH | pv -cN output -s "$FILESIZE" > "$1.sorted~"
+if [[ -s "$1.sorted~" ]]
+then
+	cp "$1.sorted~" "$1" && rm -f "$1.sorted~"
+	OUTSIZE=$(stat -c%s "$1")
+	echo -n "Written: "
+	echo "$(numfmt --grouping "$OUTSIZE") bytes"
+	echo Done.
+else
+	echo Error!
+	exit 1
+fi
+>&2 printf '\a'

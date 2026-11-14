@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# $1 = address
+wget -m -p -E -k "$1"

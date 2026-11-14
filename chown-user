@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+find . -exec chown -c user:user {} \;
+sync

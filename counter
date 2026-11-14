@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+j=0
+for i in {1..100};
+do
+	j=$(( j + 1 ))
+done
+echo $j
+
+j=0
+x=100
+for (( i=1; i<=$x; i++ ))
+do
+	j=$(( j + 1 ))
+done
+echo $j

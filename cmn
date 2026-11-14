@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [ -z "$3" ]
+	then
+		echo "3 arguments needed!"
+		exit 1
+fi
+
+printf '\n\n\n\n\n\n\n\033[7F'
+time LC_ALL=C comm -12 <(pv -cN in1 -B 100M "$1") <(pv -cN in2 -B 100M "$2") | (pv -cN out) > "$3"
+echo -e "\nResult file has $(wc -l < "$3") lines, head:"
+head "$3"
+>&2 printf '\a'

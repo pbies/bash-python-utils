@@ -1,0 +1,13 @@
+mount /dev/target1 /mnt
+rsync -aAXv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /mnt
+mount -t proc proc /mnt/proc
+mount -t sysfs sys /mnt/sys
+mount -o bind /dev /mnt/dev
+chroot /mnt
+grub-install /dev/target
+update-grub2 /dev/target
+exit
+umount /mnt/proc
+umount /mnt/sys
+umount /mnt/dev
+umount /mnt

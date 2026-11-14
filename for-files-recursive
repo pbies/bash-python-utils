@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+IFS=$'\n'; set -f
+for f in $(find . -name '*.dat'); do
+	echo "$f"
+done
+unset IFS; set +f

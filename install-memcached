@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+apt update
+apt -y install memcached libmemcached-tools
+service memcached status
+apt -y install php-memcached
+service apache2 restart

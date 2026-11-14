@@ -1,0 +1,93 @@
+Usage:
+
+@timer
+def a(): ...
+
+@timer(verbose=False)
+def b(): ...
+
+DEBUG = False
+@timer(verbose=lambda: DEBUG)
+def c(): ...
+
+with Timer('load') as t:
+	...
+print(t.elapsed)
+
+###
+
+Save the code as `timing.py` in the same directory as your script, or in any directory on `PYTHONPATH`, then import it:
+
+```python
+from timing import Timer, timer
+```
+
+**Context manager.** This times a block of code.
+
+```python
+with Timer():
+	data = [x * x for x in range(10_000_000)]
+```
+Output: `This took: 0.41234 seconds`
+
+With a label, and keeping the result for later use:
+```python
+with Timer('build list') as t:
+	data = [x * x for x in range(10_000_000)]
+print(t.elapsed)
+```
+Output: `[build list] This took: 0.41234 seconds`, then `0.41234...`
+
+Silent mode measures without printing:
+```python
+with Timer(verbose=False) as t:
+	process()
+log.write(f'{t.elapsed}\n')
+```
+
+**Decorator.** This times every call of a function.
+
+```python
+@timer
+def scan(n):
+	return sum(range(n))
+
+scan(10_000_000)
+```
+Output: `  [scan] took 0.1523s`
+
+Turned off entirely:
+```python
+@timer(verbose=False)
+def scan(n): ...
+```
+
+Runtime toggle: the lambda is checked on every call, so changing the variable later takes effect.
+```python
+VERBOSE = False
+
+@timer(verbose=lambda: VERBOSE)
+def scan(n): ...
+
+scan(10)        # no output
+VERBOSE = True
+scan(10)        # prints timing
+```
+
+Toggle driven by command-line arguments:
+```python
+import argparse
+args = argparse.Namespace(verbose=False)
+
+@timer(verbose=lambda: args.verbose)
+def scan(n): ...
+
+if __name__ == '__main__':
+	args = argparse.ArgumentParser()
+	...
+```
+The lambda reads `args` at call time, so reassigning the global after parsing works.
+
+**Behavior on exception.** The context manager prints with ` (raised)` appended and re-raises the exception. The decorator still prints the timing, then the exception propagates.
+
+Choose between them by scope: `Timer` for arbitrary code blocks, `@timer` for whole functions called repeatedly.

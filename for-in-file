@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+while IFS= read -r p; do
+	python3 ./aescbc.py -d "$p"
+done < ckeys.txt

@@ -1,0 +1,57 @@
+#!/bin/bash
+# cutbytes.sh - remove COUNT bytes from FILE starting at offset START (0-based),
+# keeping the rest of the data. Works for cuts at the start, middle, or end.
+#
+# Usage: ./cutbytes.sh FILE START COUNT
+
+set -euo pipefail
+
+if [ $# -ne 3 ]; then
+    echo "Usage: $0 FILE START COUNT" >&2
+    echo "  FILE  - file to modify in place" >&2
+    echo "  START - 0-based byte offset where the cut begins" >&2
+    echo "  COUNT - number of bytes to remove" >&2
+    exit 1
+fi
+
+file=$1
+start=$2
+count=$3
+
+if [ ! -f "$file" ]; then
+    echo "Error: '$file' does not exist or is not a regular file" >&2
+    exit 1
+fi
+
+case $start in ''|*[!0-9]*) echo "Error: START must be a non-negative integer" >&2; exit 1;; esac
+case $count in ''|*[!0-9]*) echo "Error: COUNT must be a non-negative integer" >&2; exit 1;; esac
+
+size=$(wc -c < "$file")
+
+if [ "$start" -gt "$size" ]; then
+    echo "Error: START ($start) is beyond end of file (size $size)" >&2
+    exit 1
+fi
+
+if [ $((start + count)) -gt "$size" ]; then
+    echo "Warning: cut extends past end of file, truncating at byte $size" >&2
+    count=$((size - start))
+fi
+
+if [ "$count" -eq 0 ]; then
+    echo "Nothing to cut (COUNT is 0)"
+    exit 0
+fi
+
+# Temp file in the same directory so mv is atomic (same filesystem)
+tmp=$(mktemp -- "$file.XXXXXX")
+trap 'rm -f -- "$tmp"' EXIT
+
+# Part before the cut + part after the cut (tail -c +N is 1-based)
+head -c "$start" -- "$file" > "$tmp"
+tail -c +"$((start + count + 1))" -- "$file" >> "$tmp"
+
+mv -f -- "$tmp" "$file"
+trap - EXIT
+
+echo "Removed $count byte(s) at offset $start from '$file' (new size: $((size - count)))"

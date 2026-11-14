@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# sudo apt-get install zstd
+time zstd -19 -T0 "$1"
+>&2 printf '\a'

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+printf '\n\n\n\n\n\n\n\033[7F'
+
+echo Sorting...
+sorter03.py -o output2.txt output.txt
+
+printf '\n\n\n\n\n\n\n\033[7F'
+
+echo Comparing...
+cmn addrs-with-bal.txt output2.txt r.txt
+
+echo Done!
+
+>&2 printf '\a'

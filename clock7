@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+pkill -t tty1
+sleep 1
+while :; do
+    tput clear
+    banner $(date +%T)
+    sleep .5
+done > /dev/tty1 &

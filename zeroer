@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+f="./zeros.tmp"
+sync
+b=$(df -PB1 . | awk 'NR==2 {print $4}')
+df -HB MiB .
+cat /dev/zero | pv -B 100M -s $b >> "$f"
+sync
+cat /dev/zero | pv -B 512 >> "$f"
+sync
+df -HB 1 .
+echo -n cleaning...
+rm "$f"
+echo ok
+sync
+df -HB MiB .

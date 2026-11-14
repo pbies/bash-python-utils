@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+sudo apt update
+sudo apt install clinfo
+sudo apt install intel-opencl-icd
+sudo apt install libpocl-dev
+sudo apt install nvidia-opencl-icd
+sudo apt install ocl-icd-libopencl1
+sudo apt install ocl-icd-opencl-dev
+sudo apt install opencl-headers
+sudo apt install pocl-opencl-icd

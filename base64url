@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+base64url::encode () { base64 -w0 | tr '+/' '-_' | tr -d '='; }
+base64url::decode () { awk '{ if (length($0) % 4 == 3) print $0"="; else if (length($0) % 4 == 2) print $0"=="; else print $0; }' | tr -- '-_' '+/' | base64 -d; }
+# echo 'he' | base64url::encode

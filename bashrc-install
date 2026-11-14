@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cat ~/bin/bashrc >> ~/.bashrc
+echo -e "\nalias mc='source /usr/lib/mc/mc-wrapper.sh'\n" >> ~/.profile
+touch "$HOME/.hushlogin"

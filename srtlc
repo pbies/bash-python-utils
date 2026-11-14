@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# srt < input.txt > output.txt # known progress
+# cat input.txt | srt > output.txt # unknown progress
+# don't use pv
+TH=$(echo $(nproc --all)-2 | bc)
+time pv -cN input -B 200M | dos2unix -f | tr A-Z a-z | TMPDIR=. LC_ALL=C sort -S80% -u --parallel=$TH | pv -cN output
+>&2 printf '\a'

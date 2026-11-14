@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# password must be complex!
+gpg -c --cipher-algo AES256 "$1" || exit 1
+rm -- "$1"

@@ -1,0 +1,47 @@
+# pip3 install multiprocessing # newer python already has it
+
+# sudo apt-get -y install python3.13-dev
+
+sudo apt-get update -y
+sudo apt-get dist-upgrade -y
+sudo apt-get install -y python3-dev libldap2-dev libsasl2-dev ldap-utils tox lcov valgrind
+
+sudo apt-get -y install autoconf automake libtool
+sudo apt-get -y install build-essential
+sudo apt-get -y install libcurl4-openssl-dev
+sudo apt-get -y install libdb-dev
+sudo apt-get -y install libleveldb-dev
+sudo apt-get -y install libpcre3-dev
+sudo apt-get -y install libssl-dev
+sudo apt-get -y install opencl-headers ocl-icd-opencl-dev
+python3 -m pip install base58
+python3 -m pip install bech32
+python3 -m pip install bip32utils
+python3 -m pip install bip_utils
+python3 -m pip install bit
+python3 -m pip install bsddb3
+python3 -m pip install coincurve==20.0.0
+python3 -m pip install ecdsa
+python3 -m pip install ecpy
+python3 -m pip install eth_keys
+python3 -m pip install git+https://github.com/hdwallet-io/python-hdwallet.git
+python3 -m pip install hashlib
+python3 -m pip install lz4
+python3 -m pip install mnemonic
+python3 -m pip install numpy
+python3 -m pip install p_tqdm
+python3 -m pip install pandas
+python3 -m pip install pathlib
+python3 -m pip install pycryptodome
+python3 -m pip install pyopenssl
+python3 -m pip install python-bitcoinlib
+python3 -m pip install requests
+python3 -m pip install scikit-learn tensorflow
+python3 -m pip install secp256k1
+python3 -m pip install secrets
+python3 -m pip install tqdm
+python3 -m pip install web3
+
+# macos
+# brew install berkeley-db@4
+# BERKELEYDB_DIR=$(brew --prefix berkeley-db@4) python3 -m pip install bsddb3

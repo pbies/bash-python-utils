@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+for file in *;
+do
+	echo "$file"
+	./electrum-wallet-export01.py -p qq "$file" > "$file.txt"
+done

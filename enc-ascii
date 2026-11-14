@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# password must be complex!
+gpg -c --armor --cipher-algo AES256 "$1"

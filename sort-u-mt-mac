@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+FILESIZE=$(stat -f %z "$1")
+TH=$(echo $(nproc --all)/2 | bc)
+echo -n "File size = "
+printf "%'d" $FILESIZE
+echo " bytes ; Using $TH threads"
+time pv -cN input -B 100M "$1" | dos2unix -f | LC_ALL=C sort -u --parallel=$TH | pv -cN output -s $FILESIZE > "$1.sorted~"
+if [[ -s "$1.sorted~" ]]
+then
+	mv "$1.sorted~" "$1"
+	echo Done.
+else
+	echo Error!
+fi
+>&2 printf '\a'
