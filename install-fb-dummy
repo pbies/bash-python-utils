@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sudo apt install xserver-xorg-video-dummy xserver-xorg-video-fbdev

@@ -1,0 +1,6 @@
+rm -rf /opt/certbot
+python3 -m venv /opt/certbot
+/opt/certbot/bin/pip install --upgrade pip setuptools wheel
+/opt/certbot/bin/pip install certbot certbot-apache certbot-dns-cloudflare
+ln -sf /opt/certbot/bin/certbot /usr/bin/certbot
+certbot --version

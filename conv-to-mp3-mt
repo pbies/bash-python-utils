@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+parallel -j 16 ffmpeg -i "{}" -vn -ab 320k "{.}.mp3" ::: *.*
+>&2 printf '\a'

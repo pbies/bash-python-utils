@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+nvm install --lts
+nvm use --lts
+nvm alias default lts/*

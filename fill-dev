@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+DEV="${1:?Usage: $0 /dev/sdX}"
+CHUNK=1048576  # 1 MiB
+
+python3 -c "import sys; sys.stdout.buffer.write(b'\xff' * $CHUNK)" > /tmp/ff_chunk.bin
+
+echo "Wiping $DEV with 0xFF..."
+while true; do
+    cat /tmp/ff_chunk.bin >> "$DEV" 2>/dev/null || break
+done
+
+rm -f /tmp/ff_chunk.bin
+echo "Done."
+
+# tr '\0' '\377' < /dev/zero | dd of=/dev/sdX bs=1M status=progress
+
+# dd if=<(tr '\0' '\377' < /dev/zero) of=/dev/sdX bs=1M status=progress conv=notrunc

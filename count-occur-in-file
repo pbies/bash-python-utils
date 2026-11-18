@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# $1 file
+# $2 string
+tr '[:space:]' '[\n*]' < "$1" | grep -i -c "$2"

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# use: 1 = filename ; 2 = IP or host ; 3 = port
+echo -n "$1" | nc -N "$2" $3
+cat "$1" | pv -B 100M | nc -N "$2" $3

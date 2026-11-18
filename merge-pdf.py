@@ -7,7 +7,7 @@ import sys
 
 def main():
 	if len(sys.argv) < 3:
-		print("usage: merge.py out.pdf in1.pdf in2.pdf ...")
+		print("usage: merge-pdf.py out.pdf in1.pdf in2.pdf ...")
 		return
 	out = sys.argv[1]
 	pdfs = sys.argv[2:]

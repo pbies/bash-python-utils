@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+{
+  echo obase=16
+  echo ibase=16
+  echo 436389bdc34dd718c7959db8d6df16967f2b9895e515da45fb09136183a7a9e2 +\
+       1f0c45bbe9bc71a862f0d9672d056d2d741719a2b2d46ea6b269931d0b57674f |
+   LC_ALL=C tr a-f A-F
+} | BC_LINE_LENGTH=0 bc

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+for file in *;
+do
+	echo "Checking $file..."
+	ffmpeg -v error -i "$file" -f null -
+done
+>&2 printf '\a'

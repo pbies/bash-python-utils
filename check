@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+d=$(date "+%Y-%m-%d %H:%M:%S")
+
+while IFS= read -r p; do
+	ping -f -c 5 -i 0.002 $p > /dev/null || echo "$d $p error"
+done < check.txt >> check.log 2> /dev/null

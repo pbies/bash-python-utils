@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# aria2
+time aria2c -x4 https://fsn1-speed.hetzner.com/1GB.bin
+rm -f ./1GB.bin
+time wget -O /dev/null https://fsn1-speed.hetzner.com/1GB.bin

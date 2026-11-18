@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+parallel -j 16 --bar \
+	ffmpeg -i {} -vn -ab 320k {.}.mp3 '>' /dev/null '2>' /dev/null \
+	::: *.*
+
+>&2 printf '\a'

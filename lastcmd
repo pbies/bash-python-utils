@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+sudo apt-get install xtitle
+lastcmd() { xtitle $(history 1 | cut -c8-); }
+PROMPT_COMMAND=lastcmd

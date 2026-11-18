@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+find . \( ! -regex '.*/\..*' \) -type f -size +100k -printf "%f %s\n" | sort | uniq -d

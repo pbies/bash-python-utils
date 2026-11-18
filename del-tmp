@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+find . -name "*.tmp" -type f -exec rm -v {} \;

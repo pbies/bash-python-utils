@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+date -d "2014-03-16 23:48:51 GMT -7" +"%s" | awk '{print $1 * 1000}'

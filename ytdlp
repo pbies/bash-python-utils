@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+./yt-dlp_linux -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --recode mp4 "$1" --default-search "ytsearch" --cookies-from-browser firefox
+>&2 printf '\a'

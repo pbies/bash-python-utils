@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+parallel -j 24 ffmpeg -i "{}" -q:a 0 -ab 320k -map a "{.}.mp3" ::: *.*
+>&2 printf '\a'

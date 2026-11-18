@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+fn=$(nc -l -p 3333)
+echo $fn
+nc -l -p 3333 | pv -W > "$fn"

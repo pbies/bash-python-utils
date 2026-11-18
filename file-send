@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# use: 1 = filename ; 2 = IP or host
+echo -n "$1" | nc -N "$2" 3333
+cat "$1" | pv -B 100M | nc -N "$2" 3333

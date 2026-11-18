@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+TARGET="${1:-/tmp/filltest}"
+CHUNK=1048576  # 1 MiB per write
+
+python3 -c "import sys; sys.stdout.buffer.write(b'\xff' * $CHUNK)" > /tmp/ff_chunk.bin
+
+echo "Filling to: $TARGET"
+while true; do
+    cat /tmp/ff_chunk.bin >> "$TARGET" 2>/dev/null || break
+done
+
+rm -f /tmp/ff_chunk.bin
+echo "Done or disk full."
